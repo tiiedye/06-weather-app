@@ -2,6 +2,7 @@ var loadCities = []
 
 init();
 
+// function to render saved cities
 function renderCities() {
     for (var i = 0; i < loadCities.length; i++) {
     var newBtn = $("<button>");
@@ -14,6 +15,7 @@ function renderCities() {
   }
 }
 
+// function to run and page load
 function init() {
   var storedCities = JSON.parse(localStorage.getItem("loadCities"));
 
@@ -23,11 +25,12 @@ function init() {
   renderCities();
 }
 
+// function to save cities in local storage
 function storeCities() {
   localStorage.setItem("loadCities", loadCities);
 }
 
-
+// on click event for search
 $(".searchBtn").on("click", function() {
 
     var cityName = $(".cityNameInput").val();
@@ -39,6 +42,9 @@ $(".searchBtn").on("click", function() {
       })
         .then(function(response) {
             console.log(response);
+
+        var date = new Date(JSON.stringify(response.dt)*1000);
+        $("#date").text(date);
 
         $("#name").text(response.name);
         console.log(response.name);
@@ -63,17 +69,79 @@ $(".searchBtn").on("click", function() {
         $("#newCities").append(br);
 
         var addedCityName = $(newBtn).attr("data-name");
-        // addedCityName.split('"').join('');
         loadCities.push(addedCityName);
         localStorage.setItem("loadCities", JSON.stringify(loadCities));
 
-        });
+      // second ajax call
+      var lat = response.coord.lat;
+      var lon = response.coord.lon;
+      var secondQuery = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=de86690dd9d7e0f7bd2fcb9973ca0788";
+          const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
+      $.ajax({
+        url: secondQuery,
+        method: "GET"
+      })
+        .then(function(response) {
+            console.log(response);
+
+            var weatherIcon = $("<img>");
+            var iconCode = response.current.weather[0].icon;
+            var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png"
+            weatherIcon.attr("src", iconURL);
+            $("#icon").append(weatherIcon);
+
+            $("#uvIndex").text("UV Index: " + response.current.uvi);
+            console.log(response.current.uvi);
+
+            var date0 = new Date(JSON.stringify(response.daily[0].dt)*1000);
+            $("#day0").html(`${days[date0.getDay()]} ${(date0.getMonth() +1)}/${date0.getDate()}  ${date0.getFullYear()} <br> ${response.daily[0].weather[0].description}`);
+            console.log(date0);
+            var day0Icon = $("<img>");
+            var day0Code = response.daily[0].weather[0].icon;
+            var day0URL = "http://openweathermap.org/img/w/" + day0Code + ".png"
+            day0Icon.attr("src", day0URL);
+            $("#day0").append(day0Icon);
+
+            var date1 = new Date(JSON.stringify(response.daily[1].dt)*1000);
+            $("#day1").html(`${days[date1.getDay()]} ${(date1.getMonth() +1)}/${date1.getDate()}  ${date1.getFullYear()} <br> ${response.daily[1].weather[0].description}`);
+            var day1Icon = $("<img>");
+            var day1Code = response.daily[1].weather[0].icon;
+            var day1URL = "http://openweathermap.org/img/w/" + day1Code + ".png"
+            day1Icon.attr("src", day1URL);
+            $("#day1").append(day1Icon);
+
+            var date2 = new Date(JSON.stringify(response.daily[2].dt)*1000);
+            $("#day2").html(`${days[date2.getDay()]} ${(date2.getMonth() +1)}/${date2.getDate()}  ${date2.getFullYear()} <br> ${response.daily[2].weather[0].description}`);
+            var day2Icon = $("<img>");
+            var day2Code = response.daily[2].weather[0].icon;
+            var day2URL = "http://openweathermap.org/img/w/" + day2Code + ".png"
+            day2Icon.attr("src", day2URL);
+            $("#day2").append(day2Icon);
+
+            var date3 = new Date(JSON.stringify(response.daily[3].dt)*1000);
+            $("#day3").html(`${days[date3.getDay()]} ${(date3.getMonth() +1)}/${date3.getDate()}  ${date3.getFullYear()} <br> ${response.daily[3].weather[0].description}`);
+            var day3Icon = $("<img>");
+            var day3Code = response.daily[3].weather[0].icon;
+            var day3URL = "http://openweathermap.org/img/w/" + day3Code + ".png"
+            day3Icon.attr("src", day3URL);
+            $("#day3").append(day3Icon);
+
+            var date4 = new Date(JSON.stringify(response.daily[4].dt)*1000);
+            $("#day4").html(`${days[date4.getDay()]} ${(date4.getMonth() +1)}/${date4.getDate()}  ${date4.getFullYear()} <br> ${response.daily[4].weather[0].description}`);
+            var day4Icon = $("<img>");
+            var day4Code = response.daily[4].weather[0].icon;
+            var day4URL = "http://openweathermap.org/img/w/" + day4Code + ".png"
+            day4Icon.attr("src", day4URL);
+            $("#day4").append(day4Icon);
+          });
+      });
 });
 
+// on click event for previously saved cities
 $(".city").on("click", function() {
 
   var cityName = $(this).attr("data-name");
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=de86690dd9d7e0f7bd2fcb9973ca0788"
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=de86690dd9d7e0f7bd2fcb9973ca0788";
 
   $.ajax({
       url: queryURL,

@@ -11,3 +11,10 @@ h1 {
 .weatherDisplay {
     float: left;
 }
+
+.forcast {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    background-color: steelblue;
+    color: white;
+}
