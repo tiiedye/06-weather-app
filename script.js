@@ -43,9 +43,9 @@ $(".searchBtn").on("click", function() {
         $("#name").text(response.name);
         console.log(response.name);
 
-        var temperature = ((JSON.parse(response.main.temp) - 273.15) * 1.80 + 32);
+        var temperature = Math.floor(((JSON.parse(response.main.temp) - 273.15) * 1.80 + 32));
 
-        $("#temp").text("Temperature: " + temperature);
+        $("#temp").text("Temperature: " + temperature + "F");
         console.log(temperature);
 
         $("#humidity").text("Humidity: " + response.main.humidity + "%");
@@ -67,7 +67,6 @@ $(".searchBtn").on("click", function() {
         loadCities.push(addedCityName);
         localStorage.setItem("loadCities", JSON.stringify(loadCities));
 
-        // storeCities();
         });
 });
 
@@ -81,21 +80,16 @@ $(".city").on("click", function() {
       method: "GET"
     })
       .then(function(response) {
-          console.log(response);
 
       $("#name").text(response.name);
-      console.log(response.name);
 
-      var temperature = ((JSON.parse(response.main.temp) - 273.15) * 1.80 + 32);
+      var temperature = Math.floor(((JSON.parse(response.main.temp) - 273.15) * 1.80 + 32));
 
-      $("#temp").text("Temperature: " + temperature);
-      console.log(temperature);
+      $("#temp").text("Temperature: " + temperature + " F");
 
       $("#humidity").text("Humidity: " + response.main.humidity + "%");
-      console.log(response.main.humidity);
 
       $("#windSpeed").text("Wind Speed: " + response.wind.speed + " MPH");
-      console.log(response.wind.speed);
 
       });
 });
