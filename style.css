@@ -19,3 +19,15 @@ h1 {
     color: white;
     font-size: small;
 }
+
+.low {
+    background-color: green;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.high {
+    background-color: red;
+}

@@ -91,7 +91,25 @@ $(".searchBtn").on("click", function() {
             weatherIcon.attr("src", iconURL);
             $("#icon").append(weatherIcon);
 
-            $("#uvIndex").text("UV Index: " + response.current.uvi);
+            if (response.current.uvi < 3) {
+            $("#uvIndex").empty();
+            var UVI = $("<span>");
+            UVI.text("UV Index: " + response.current.uvi);
+            UVI.addClass("low");
+            $("#uvIndex").append(UVI);
+            } else if (response.current.uvi > 7) {
+              $("#uvIndex").empty();
+              var UVI = $("<span>");
+              UVI.text("UV Index: " + response.current.uvi);
+              UVI.addClass("high");
+              $("#uvIndex").append(UVI);
+            } else {
+              $("#uvIndex").empty();
+              var UVI = $("<span>");
+              UVI.text("UV Index: " + response.current.uvi);
+              UVI.addClass("moderate");
+              $("#uvIndex").append(UVI);
+            }
             console.log(response.current.uvi);
 
             var date0 = new Date(JSON.stringify(response.daily[0].dt)*1000);
@@ -179,7 +197,25 @@ $(".searchBtn").on("click", function() {
                       weatherIcon.attr("src", iconURL);
                       $("#icon").append(weatherIcon);
               
-                      $("#uvIndex").text("UV Index: " + response.current.uvi);
+                      if (response.current.uvi < 3) {
+                        $("#uvIndex").empty();
+                        var UVI = $("<span>");
+                        UVI.text("UV Index: " + response.current.uvi);
+                        UVI.addClass("low");
+                        $("#uvIndex").append(UVI);
+                        } else if (response.current.uvi > 7) {
+                          $("#uvIndex").empty();
+                          var UVI = $("<span>");
+                          UVI.text("UV Index: " + response.current.uvi);
+                          UVI.addClass("high");
+                          $("#uvIndex").append(UVI);
+                        } else {
+                          $("#uvIndex").empty();
+                          var UVI = $("<span>");
+                          UVI.text("UV Index: " + response.current.uvi);
+                          UVI.addClass("moderate");
+                          $("#uvIndex").append(UVI);
+                        }
                       console.log(response.current.uvi);
               
                       var date0 = new Date(JSON.stringify(response.daily[0].dt)*1000);
@@ -270,7 +306,25 @@ $(".city").on("click", function() {
             weatherIcon.attr("src", iconURL);
             $("#icon").append(weatherIcon);
     
-            $("#uvIndex").text("UV Index: " + response.current.uvi);
+            if (response.current.uvi < 3) {
+              $("#uvIndex").empty();
+              var UVI = $("<span>");
+              UVI.text("UV Index: " + response.current.uvi);
+              UVI.addClass("low");
+              $("#uvIndex").append(UVI);
+              } else if (response.current.uvi > 7) {
+                $("#uvIndex").empty();
+                var UVI = $("<span>");
+                UVI.text("UV Index: " + response.current.uvi);
+                UVI.addClass("high");
+                $("#uvIndex").append(UVI);
+              } else {
+                $("#uvIndex").empty();
+                var UVI = $("<span>");
+                UVI.text("UV Index: " + response.current.uvi);
+                UVI.addClass("moderate");
+                $("#uvIndex").append(UVI);
+              }
             console.log(response.current.uvi);
     
             var date0 = new Date(JSON.stringify(response.daily[0].dt)*1000);
