@@ -1,11 +1,19 @@
-# 06 Server-Side APIs: Weather Dashboard
+![made-with-VSCode](https://img.shields.io/badge/Made%20With-VS%20Code-blue)  ![Using-API](https://img.shields.io/badge/Using-APIs-ff69b4)
 
-Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. 
-
+# Weather App
 Uses the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
 
-## User Story
+<img src="./Assets/06-server-side-apis-homework-demo.png"
+     alt="Img"
+     style="margin-right: 10px; height: 400px;" />
 
+### Uses
+* HTML
+* CSS
+* jQuery
+* Third-Party APIs
+
+### User Story
 ```
 AS A traveler
 I WANT to see the weather outlook for multiple cities
